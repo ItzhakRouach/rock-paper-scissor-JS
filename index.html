@@ -3,8 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
     <title>ROCKE PAPER SCISSOR</title>
   </head>
-  <body></body>
+  <body>
+    <div class="header">
+      <div class="computer">
+        <label>Computer: </label>
+        <span id="com"></span>
+      </div>
+      <h2>Rock , Papar , Scissor Game</h2>
+      <div class="user">
+        <label>User: </label>
+        <span id="user"></span>
+      </div>
+    </div>
+    <div class="container">
+      <button id="rock">ROCK</button>
+      <button id="paper">PAPER</button>
+      <button id="scissor">SCISSOR</button>
+    </div>
+    <div class="result"></div>
+  </body>
 </html>

@@ -1,0 +1,46 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2.5rem;
+}
+.header > h2 {
+  font-size: 45px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  padding-top: 5rem;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  padding: 35px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+#rock {
+  background-color: grey;
+  color: aliceblue;
+}
+#paper {
+  background-color: rgb(79, 79, 219);
+  color: white;
+}
+#scissor {
+  background-color: rgb(217, 80, 80);
+  color: white;
+}

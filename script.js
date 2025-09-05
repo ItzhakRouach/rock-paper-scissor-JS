@@ -3,11 +3,23 @@
 // Input is None and Output is a random answer between the three
 // Can use array or Math.random that way in  0 = Rock , 1 = Paper and 3 = Scissor
 
+// Initilizer for score track
 let humanScore = 0;
 let computerScore = 0;
 
-let getComputerChoice = () => {
-  //  0 = Rock , 1 = Paper and 3 = Scissor
+// selector for elements to be change according the game
+const user = document.querySelector("#user");
+const com = document.querySelector("#com");
+const result = document.querySelector(".result");
+
+// Buttons Selectors
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorBtn = document.querySelector("#scissor");
+
+// Return computer choice of rock papar or scissor
+const getComputerChoice = () => {
+  //  0 = Rock , 1 = Paper and 2 = Scissor
   choice = Math.floor(Math.random() * 3);
   switch (choice) {
     case 0:
@@ -21,49 +33,68 @@ let getComputerChoice = () => {
   }
 };
 
-let getHumanChoice = (choice) => {
-  return (choice = prompt("Rock , Paper or Scissor? : "));
-};
+// Set message deppend on who win
+const userWinRound = (humanSelection, computerSelection) =>
+  `You Win ${humanSelection} beat ${computerSelection}`;
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+const comWinRound = (humanSelection, computerSelection) =>
+  `You Loose ${computerSelection} beat ${humanSelection}`;
 
-function playRound(humanSelection, computerSelection) {
-  humanSelection = humanSelection.toLowerCase();
-  computerSelection = computerSelection.toLowerCase();
+// Update the score acording to humanScore and computerScore
+function updateScoreUI() {
+  user.textContent = humanScore;
+  com.textContent = computerScore;
+}
 
-  if (humanSelection == "rock" && computerSelection == "scissor") {
-    humanScore += 1;
-    return console.log("You Win Rock beat Scissor");
-  } else if (humanSelection == "paper" && computerSelection == "rock") {
-    humanScore += 1;
-    return console.log("You Win Paper beat Rock");
-  } else if (humanSelection == "scissor" && computerSelection == "paper") {
-    humanScore += 1;
-    return console.log("You Win Scissor beat Paper");
-  } else if (humanSelection == "paper" && computerSelection == "scissor") {
-    computerScore += 1;
-    return console.log("You Loose Scissor beat Paper");
-  } else if (humanSelection == "rock" && computerSelection == "paper") {
-    computerScore += 1;
-    return console.log("You Loose Paper beat Rock");
-  } else if (humanSelection == "scissor" && computerSelection == "rock") {
-    computerScore += 1;
-    return console.log("You Loose Rock beat Scissor");
-  } else {
-    return console.log("Draw");
+// Show who won the round on the website
+function showRound(msg) {
+  const para = document.createElement("p");
+  para.textContent = msg;
+  result.appendChild(para);
+}
+
+// Check if someone won by get 5 wins , and set all the initilize to start
+function checkIsGameOver() {
+  if (humanScore >= 5 || computerScore >= 5) {
+    const winner = humanScore > computerScore ? "You Won!" : "You Loose!";
+    alert(`Game Over! ${winner} the game!`);
+    humanScore = 0;
+    computerScore = 0;
+    result.replaceChildren();
   }
 }
 
-let playGame = () => {
-  humanScore = 0;
-  computerScore = 0;
-  for (let i = 1; i <= 5; i++) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    playRound(humanSelection, computerSelection);
-  }
-  console.log(`You win ${humanScore} time and Computer ${computerScore}`);
-};
+// Responsable to the functiollity of the game
+function playRound(humanSelection, computerSelection) {
+  const human = humanSelection.toLowerCase();
+  const comp = computerSelection.toLowerCase();
 
-playGame();
+  if (human === comp) {
+    showRound("Draw");
+  } else if (
+    (human == "rock" && comp == "scissor") ||
+    (human == "paper" && comp == "rock") ||
+    (human == "scissor" && comp == "paper")
+  ) {
+    humanScore++;
+    showRound(userWinRound(human, comp));
+  } else {
+    computerScore++;
+    showRound(comWinRound(human, comp));
+  }
+
+  updateScoreUI();
+  checkIsGameOver();
+}
+
+// Handle the btn clicked and acording to what clicked that will be the user choice to be passed to the game main function
+rockBtn.addEventListener("click", () => playRound("rock", getComputerChoice()));
+paperBtn.addEventListener("click", () =>
+  playRound("paper", getComputerChoice())
+);
+scissorBtn.addEventListener("click", () =>
+  playRound("scissor", getComputerChoice())
+);
+
+// Update the score acroding to the game
+updateScoreUI();
