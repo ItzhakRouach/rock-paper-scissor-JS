@@ -61,6 +61,7 @@ function checkIsGameOver() {
     humanScore = 0;
     computerScore = 0;
     result.replaceChildren();
+    updateScoreUI();
   }
 }
 

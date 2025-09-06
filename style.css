@@ -17,7 +17,7 @@
   display: flex;
   justify-content: center;
   gap: 3rem;
-  padding-top: 5rem;
+  padding: 3.5rem;
 }
 
 .result {
@@ -43,4 +43,11 @@ button {
 #scissor {
   background-color: rgb(217, 80, 80);
   color: white;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+  padding: 0 20px;
 }
